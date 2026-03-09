@@ -1,172 +1,135 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Issues Tracker</title>
 
-<title>GitHub Issues Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<link rel="stylesheet" href="style.css">
+  <body class="bg-gray-100">
+    <!-- LOGIN PAGE -->
 
-</head>
+    <section
+      id="loginPage"
+      class="min-h-screen flex items-center justify-center"
+    >
+      <div class="card bg-white shadow-xl p-8 w-[400px]">
+        <div class="text-center flex flex-col items-center mb-6">
+          <img
+            src="./B13-A5-Github-Issue-Tracker/assets/github-logo.png"
+            class="w-14 mb-2"
+          />
 
-<body class="bg-gray-100">
+          <h2 class="text-2xl font-bold">GitHub Issues Tracker</h2>
 
-<!-- LOGIN PAGE -->
+          <p class="text-gray-500 text-sm">Sign in to manage your issues</p>
+        </div>
 
-<section id="loginPage" class="min-h-screen flex items-center justify-center">
+        <label class="label">Username</label>
+        <input id="username" type="text" class="input input-bordered" />
 
-<div class="card bg-white shadow-xl p-8 w-[400px]">
+        <p class="text-xs text-purple-600 mb-3">Default: admin</p>
 
-<div class="text-center flex flex-col items-center mb-6">
+        <label class="label">Password</label>
+        <input id="password" type="password" class="input input-bordered" />
 
-<img src="./B13-A5-Github-Issue-Tracker/assets/github-logo.png" class="w-14 mb-2">
+        <p class="text-xs text-purple-600 mb-4">Default: admin123</p>
 
-<h2 class="text-2xl font-bold">
-GitHub Issues Tracker
-</h2>
+        <button onclick="login()" class="btn btn-primary w-full">
+          Sign In
+        </button>
+      </div>
+    </section>
 
-<p class="text-gray-500 text-sm">
-Sign in to manage your issues
-</p>
+    <!-- MAIN PAGE -->
 
-</div>
+    <section id="mainPage" class="hidden container mx-auto p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-bold">GitHub Issues Tracker</h2>
 
-<label class="label">Username</label>
-<input id="username" type="text" class="input input-bordered">
+        <div class="flex gap-2">
+          <input
+            id="searchInput"
+            class="input input-bordered"
+            placeholder="Search issues..."
+          />
 
-<p class="text-xs text-purple-600 mb-3">Default: admin</p>
+          <button class="btn btn-primary" onclick="searchIssues()">
+            Search
+          </button>
+        </div>
+      </div>
 
-<label class="label">Password</label>
-<input id="password" type="password" class="input input-bordered">
+      <!-- FILTER -->
 
-<p class="text-xs text-purple-600 mb-4">Default: admin123</p>
+      <div class="mb-4 flex gap-3">
+        <button class="btn btn-primary" onclick="loadIssues()">All</button>
 
-<button onclick="login()" class="btn btn-primary w-full">
-Sign In
-</button>
+        <button class="btn btn-outline" onclick="filterIssues('open')">
+          Open
+        </button>
 
-</div>
+        <button class="btn btn-outline" onclick="filterIssues('closed')">
+          Closed
+        </button>
+      </div>
 
-</section>
+      <!-- ISSUE COUNT -->
 
+      <div class="mb-4">
+        <h2 class="font-bold"><span id="issueCount">0</span> Issues</h2>
 
+        <p class="text-sm text-gray-500">
+          Track and manage your project issues
+        </p>
+      </div>
 
-<!-- MAIN PAGE -->
+      <!-- LOADING -->
 
-<section id="mainPage" class="hidden container mx-auto p-6">
+      <div
+        id="loadingSpinner"
+        class="flex justify-center items-center h-[50vh]"
+      >
+        <span class="loading loading-dots loading-lg"></span>
+      </div>
 
-<div class="flex justify-between items-center mb-6">
+      <!-- ISSUES GRID -->
 
-<h2 class="text-xl font-bold">
-GitHub Issues Tracker
-</h2>
+      <div
+        id="issuesContainer"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+      ></div>
+    </section>
 
-<div class="flex gap-2">
+    <!-- ISSUE MODAL -->
 
-<input id="searchInput"
-class="input input-bordered"
-placeholder="Search issues...">
+    <dialog id="issueModal" class="modal">
+      <div class="modal-box">
+        <h3 id="modalTitle" class="font-bold text-xl"></h3>
 
-<button class="btn btn-primary"
-onclick="searchIssues()">
-Search
-</button>
+        <p class="text-sm text-gray-500 mb-3">
+          Opened by <span id="modalAuthor"></span>
+        </p>
 
-</div>
+        <p id="modalDescription" class="mb-4"></p>
 
-</div>
+        <p><strong>Priority:</strong> <span id="modalPriority"></span></p>
+        <p><strong>Label:</strong> <span id="modalLabel"></span></p>
 
+        <div class="modal-action">
+          <form method="dialog">
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
 
-<!-- FILTER -->
-
-<div class="mb-4 flex gap-3">
-
-<button class="btn btn-primary" onclick="loadIssues()">All</button>
-
-<button class="btn btn-outline"
-onclick="filterIssues('open')">
-Open
-</button>
-
-<button class="btn btn-outline"
-onclick="filterIssues('closed')">
-Closed
-</button>
-
-</div>
-
-
-<!-- ISSUE COUNT -->
-
-<div class="mb-4">
-
-<h2 class="font-bold">
-<span id="issueCount">0</span> Issues
-</h2>
-
-<p class="text-sm text-gray-500">
-Track and manage your project issues
-</p>
-
-</div>
-
-
-<!-- LOADING -->
-
-<div id="loadingSpinner"
-class="flex justify-center items-center h-[50vh] ">
-
-<span class="loading loading-dots loading-lg"></span>
-
-</div>
-
-
-<!-- ISSUES GRID -->
-
-<div id="issuesContainer"
-class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-</div>
-
-</section>
-
-
-
-<!-- ISSUE MODAL -->
-
-<dialog id="issueModal" class="modal">
-
-<div class="modal-box">
-
-<h3 id="modalTitle" class="font-bold text-xl"></h3>
-
-<p class="text-sm text-gray-500 mb-3">
-Opened by <span id="modalAuthor"></span>
-</p>
-
-<p id="modalDescription" class="mb-4"></p>
-
-<p><strong>Priority:</strong> <span id="modalPriority"></span></p>
-<p><strong>Label:</strong> <span id="modalLabel"></span></p>
-
-<div class="modal-action">
-
-<form method="dialog">
-<button class="btn">Close</button>
-</form>
-
-</div>
-
-</div>
-
-</dialog>
-
-
-<script src="script.js"></script>
-
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
