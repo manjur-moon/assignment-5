@@ -1,84 +1,84 @@
-.btn-primary{
-background:#4f46e5;
-border:none;
-color:white;
+.btn-primary {
+    background: #4f46e5;
+    border: none;
+    color: white;
 }
 
-.issue-card{
-border-radius:12px;
-background:white;
-padding:18px;
-box-shadow:0 3px 12px rgba(0,0,0,0.08);
-transition:0.25s;
-cursor:pointer;
+.issue-card {
+    border-radius: 12px;
+    background: white;
+    padding: 18px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    transition: 0.25s;
+    cursor: pointer;
 }
 
-.issue-card:hover{
-transform:translateY(-6px);
-box-shadow:0 10px 20px rgba(0,0,0,0.12);
+.issue-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
 }
 
 
 /* status border */
 
-.open-border{
-border-top:4px solid #22c55e;
+.open-border {
+    border-top: 4px solid #22c55e;
 }
 
-.closed-border{
-border-top:4px solid #9333ea;
+.closed-border {
+    border-top: 4px solid #9333ea;
 }
 
 
 /* priority */
 
-.priority-high{
-background:#fee2e2;
-color:#dc2626;
-padding:4px 10px;
-font-size:12px;
-border-radius:20px;
+.priority-high {
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 20px;
 }
 
-.priority-medium{
-background:#fef3c7;
-color:#b45309;
-padding:4px 10px;
-font-size:12px;
-border-radius:20px;
+.priority-medium {
+    background: #fef3c7;
+    color: #b45309;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 20px;
 }
 
-.priority-low{
-background:#e5e7eb;
-color:#374151;
-padding:4px 10px;
-font-size:12px;
-border-radius:20px;
+.priority-low {
+    background: #e5e7eb;
+    color: #374151;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 20px;
 }
 
 
 /* labels */
 
-.label-bug{
-background:#fee2e2;
-color:#dc2626;
-padding:4px 8px;
-font-size:11px;
-border-radius:20px;
+.label-bug {
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 20px;
 }
 
-.label-help{
-background:#fef3c7;
-color:#b45309;
-padding:4px 8px;
-font-size:11px;
-border-radius:20px;
+.label-help {
+    background: #fef3c7;
+    color: #b45309;
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 20px;
 }
 
-.label-enhancement{
-background:#dcfce7;
-color:#15803d;
-padding:4px 8px;
-font-size:11px;
-border-radius:20px;
+.label-enhancement {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 20px;
 }
