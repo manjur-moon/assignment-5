@@ -42,7 +42,7 @@ async function loadIssues() {
   showLoading();
 
   const res = await fetch(
-    "https://phi-lab-server.vercel.app/api/v1/lab/issues"
+    "https://phi-lab-server.vercel.app/api/v1/lab/issues",
   );
 
   const data = await res.json();
@@ -76,47 +76,51 @@ function displayIssues(issues) {
   issues.forEach((issue) => {
     const card = document.createElement("div");
 
-    card.className = `issue-card ${
-      issue.status === "open" ? "open-border" : "closed-border"
-    }`;
+    card.className = `issue-card ${issue.status === "open" ? "open-border" : "closed-border"}`;
 
     card.innerHTML = `
-      <div onclick="openIssue(${issue.id})">
 
-        <div class="flex justify-between items-center mb-2">
-          <div class="w-6 h-6 bg-green-100 rounded-full"></div>
+<div onclick="openIssue(${issue.id})">
 
-          <span class="${getPriorityClass(issue.priority)}">
-            ${issue.priority}
-          </span>
-        </div>
+<div class="flex justify-between items-center mb-2">
 
-        <h3 class="font-semibold text-gray-800 mb-2">
-          ${issue.title}
-        </h3>
+<div class="w-6 h-6 bg-green-100 rounded-full"></div>
 
-        <p class="text-sm text-gray-500 mb-3 line-clamp-2">
-          ${issue.description}
-        </p>
+<span class="${getPriorityClass(issue.priority)}">
+${issue.priority}
+</span>
 
-        <div class="flex gap-2 mb-3">
-          <span class="${getLabelClass(issue.label)}">
-            ${issue.label}
-          </span>
-        </div>
+</div>
 
-        <hr class="mb-2">
+<h3 class="font-semibold text-gray-800 mb-2">
+${issue.title}
+</h3>
 
-        <p class="text-xs text-gray-500">
-          #${issue.id} by ${issue.author}
-        </p>
+<p class="text-sm text-gray-500 mb-3 line-clamp-2">
+${issue.description}
+</p>
 
-        <p class="text-xs text-gray-400">
-          ${issue.createdAt}
-        </p>
+<div class="flex gap-2 mb-3">
 
-      </div>
-    `;
+<span class="${getLabelClass(issue.label)}">
+${issue.label}
+</span>
+
+</div>
+
+<hr class="mb-2">
+
+<p class="text-xs text-gray-500">
+#${issue.id} by ${issue.author}
+</p>
+
+<p class="text-xs text-gray-400">
+${issue.createdAt}
+</p>
+
+</div>
+
+`;
 
     issuesContainer.appendChild(card);
   });
@@ -136,7 +140,7 @@ async function searchIssues() {
   showLoading();
 
   const res = await fetch(
-    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${text}`
+    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${text}`,
   );
 
   const data = await res.json();
@@ -148,7 +152,7 @@ async function searchIssues() {
 
 async function openIssue(id) {
   const res = await fetch(
-    `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`
+    `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`,
   );
 
   const data = await res.json();

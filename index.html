@@ -1,135 +1,172 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>GitHub Issues Tracker</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<title>GitHub Issues Tracker</title>
 
-    <link rel="stylesheet" href="style.css" />
-  </head>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-  <body class="bg-gray-100">
-    <!-- LOGIN PAGE -->
+<link rel="stylesheet" href="style.css">
 
-    <section
-      id="loginPage"
-      class="min-h-screen flex items-center justify-center"
-    >
-      <div class="card bg-white shadow-xl p-8 w-[400px]">
-        <div class="text-center flex flex-col items-center mb-6">
-          <img
-            src="./B13-A5-Github-Issue-Tracker/assets/github-logo.png"
-            class="w-14 mb-2"
-          />
+</head>
 
-          <h2 class="text-2xl font-bold">GitHub Issues Tracker</h2>
+<body class="bg-gray-100">
 
-          <p class="text-gray-500 text-sm">Sign in to manage your issues</p>
-        </div>
+<!-- LOGIN PAGE -->
 
-        <label class="label">Username</label>
-        <input id="username" type="text" class="input input-bordered" />
+<section id="loginPage" class="min-h-screen flex items-center justify-center">
 
-        <p class="text-xs text-purple-600 mb-3">Default: admin</p>
+<div class="card bg-white shadow-xl p-8 w-[400px]">
 
-        <label class="label">Password</label>
-        <input id="password" type="password" class="input input-bordered" />
+<div class="text-center flex flex-col items-center mb-6">
 
-        <p class="text-xs text-purple-600 mb-4">Default: admin123</p>
+<img src="./B13-A5-Github-Issue-Tracker/assets/github-logo.png" class="w-14 mb-2">
 
-        <button onclick="login()" class="btn btn-primary w-full">
-          Sign In
-        </button>
-      </div>
-    </section>
+<h2 class="text-2xl font-bold">
+GitHub Issues Tracker
+</h2>
 
-    <!-- MAIN PAGE -->
+<p class="text-gray-500 text-sm">
+Sign in to manage your issues
+</p>
 
-    <section id="mainPage" class="hidden container mx-auto p-6">
-      <div class="flex justify-between items-center mb-6">
-        <h2 class="text-xl font-bold">GitHub Issues Tracker</h2>
+</div>
 
-        <div class="flex gap-2">
-          <input
-            id="searchInput"
-            class="input input-bordered"
-            placeholder="Search issues..."
-          />
+<label class="label">Username</label>
+<input id="username" type="text" class="input input-bordered">
 
-          <button class="btn btn-primary" onclick="searchIssues()">
-            Search
-          </button>
-        </div>
-      </div>
+<p class="text-xs text-purple-600 mb-3">Default: admin</p>
 
-      <!-- FILTER -->
+<label class="label">Password</label>
+<input id="password" type="password" class="input input-bordered">
 
-      <div class="mb-4 flex gap-3">
-        <button class="btn btn-primary" onclick="loadIssues()">All</button>
+<p class="text-xs text-purple-600 mb-4">Default: admin123</p>
 
-        <button class="btn btn-outline" onclick="filterIssues('open')">
-          Open
-        </button>
+<button onclick="login()" class="btn btn-primary w-full">
+Sign In
+</button>
 
-        <button class="btn btn-outline" onclick="filterIssues('closed')">
-          Closed
-        </button>
-      </div>
+</div>
 
-      <!-- ISSUE COUNT -->
+</section>
 
-      <div class="mb-4">
-        <h2 class="font-bold"><span id="issueCount">0</span> Issues</h2>
 
-        <p class="text-sm text-gray-500">
-          Track and manage your project issues
-        </p>
-      </div>
 
-      <!-- LOADING -->
+<!-- MAIN PAGE -->
 
-      <div
-        id="loadingSpinner"
-        class="flex justify-center items-center h-[50vh]"
-      >
-        <span class="loading loading-dots loading-lg"></span>
-      </div>
+<section id="mainPage" class="hidden container mx-auto p-6">
 
-      <!-- ISSUES GRID -->
+<div class="flex justify-between items-center mb-6">
 
-      <div
-        id="issuesContainer"
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-      ></div>
-    </section>
+<h2 class="text-xl font-bold">
+GitHub Issues Tracker
+</h2>
 
-    <!-- ISSUE MODAL -->
+<div class="flex gap-2">
 
-    <dialog id="issueModal" class="modal">
-      <div class="modal-box">
-        <h3 id="modalTitle" class="font-bold text-xl"></h3>
+<input id="searchInput"
+class="input input-bordered"
+placeholder="Search issues...">
 
-        <p class="text-sm text-gray-500 mb-3">
-          Opened by <span id="modalAuthor"></span>
-        </p>
+<button class="btn btn-primary"
+onclick="searchIssues()">
+Search
+</button>
 
-        <p id="modalDescription" class="mb-4"></p>
+</div>
 
-        <p><strong>Priority:</strong> <span id="modalPriority"></span></p>
-        <p><strong>Label:</strong> <span id="modalLabel"></span></p>
+</div>
 
-        <div class="modal-action">
-          <form method="dialog">
-            <button class="btn">Close</button>
-          </form>
-        </div>
-      </div>
-    </dialog>
 
-    <script src="script.js"></script>
-  </body>
+<!-- FILTER -->
+
+<div class="mb-4 flex gap-3">
+
+<button class="btn btn-primary" onclick="loadIssues()">All</button>
+
+<button class="btn btn-outline"
+onclick="filterIssues('open')">
+Open
+</button>
+
+<button class="btn btn-outline"
+onclick="filterIssues('closed')">
+Closed
+</button>
+
+</div>
+
+
+<!-- ISSUE COUNT -->
+
+<div class="mb-4">
+
+<h2 class="font-bold">
+<span id="issueCount">0</span> Issues
+</h2>
+
+<p class="text-sm text-gray-500">
+Track and manage your project issues
+</p>
+
+</div>
+
+
+<!-- LOADING -->
+
+<div id="loadingSpinner"
+class="flex justify-center items-center h-[50vh] ">
+
+<span class="loading loading-dots loading-lg"></span>
+
+</div>
+
+
+<!-- ISSUES GRID -->
+
+<div id="issuesContainer"
+class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+</div>
+
+</section>
+
+
+
+<!-- ISSUE MODAL -->
+
+<dialog id="issueModal" class="modal">
+
+<div class="modal-box">
+
+<h3 id="modalTitle" class="font-bold text-xl"></h3>
+
+<p class="text-sm text-gray-500 mb-3">
+Opened by <span id="modalAuthor"></span>
+</p>
+
+<p id="modalDescription" class="mb-4"></p>
+
+<p><strong>Priority:</strong> <span id="modalPriority"></span></p>
+<p><strong>Label:</strong> <span id="modalLabel"></span></p>
+
+<div class="modal-action">
+
+<form method="dialog">
+<button class="btn">Close</button>
+</form>
+
+</div>
+
+</div>
+
+</dialog>
+
+
+<script src="script.js"></script>
+
+</body>
 </html>
